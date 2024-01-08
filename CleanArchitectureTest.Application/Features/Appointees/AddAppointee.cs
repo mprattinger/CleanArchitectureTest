@@ -41,8 +41,10 @@ public class AddAppointee
 
                 var ta = new TodoAppointee
                 {
-                    Todo = todo,
-                    Appointee = appointee,
+                    TodoId = todo.Id,
+                    AppointeeId = appointee.Id,
+                    CreatedOn = DateTime.UtcNow,
+                    UpdatedOn = DateTime.UtcNow
                 };
 
                 _context.TodoAppointees.Add(ta);
@@ -50,8 +52,8 @@ public class AddAppointee
 
                 return new TodoAppointeeEntity
                 {
-                    Todo = ta.Todo.Adapt<TodoEntity>(),
-                    Appointee = ta.Appointee.Adapt<MemberEntity>()
+                    Todo = todo.Adapt<TodoEntity>(),
+                    Appointee = appointee.Adapt<MemberEntity>()
                 };
             }
             catch (Exception ex)

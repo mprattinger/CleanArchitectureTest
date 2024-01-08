@@ -22,16 +22,6 @@ public class ApplicationContext : DbContext
 
         modelBuilder.Entity<TodoAppointee>()
         .HasKey(ta => new { ta.TodoId, ta.AppointeeId });
-
-        modelBuilder.Entity<TodoAppointee>()
-            .HasOne(ta => ta.Todo)
-            .WithMany(t => t.TodoAppointees)
-            .HasForeignKey(ta => ta.AppointeeId);
-
-        modelBuilder.Entity<TodoAppointee>()
-            .HasOne(ta => ta.Appointee)
-            .WithMany(m => m.TodoAppointees)
-            .HasForeignKey(ta => ta.TodoId);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

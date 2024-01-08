@@ -13,6 +13,4 @@ public class Todo : Base
     public required Guid CreatedById { get; set; }
 
     public virtual Member? CreatedBy { get; set; }
-
-    public IEnumerable<TodoAppointee> TodoAppointees { get; set; } = Enumerable.Empty<TodoAppointee>();
 }

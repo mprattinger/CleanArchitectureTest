@@ -1,0 +1,38 @@
+﻿@page "/"
+@using CleanArchitectureTest.Client.Features.Todos
+@using CleanArchitectureTest.Contracts.Entities
+
+@inject ITodoService todoService
+
+<PageTitle>Home</PageTitle>
+
+<h1>Platform: @(OperatingSystem.IsBrowser() ? "Wasm" : "Server")</h1>
+
+<ul>
+    @foreach(var t in _todos)
+    {
+        <li>@t.Title - @t.Description</li>
+    }
+</ul>
+
+@if(_error is not null && !String.IsNullOrEmpty(_error))
+{
+    <span>@_error</span>
+}
+
+@code {
+    List<TodoEntity> _todos = [];
+    string? _error;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _todos = await todoService.GetTodos();
+        }
+        catch (Exception ex)
+        {
+            _error = $"{ex.Message}";
+        }
+    }
+}

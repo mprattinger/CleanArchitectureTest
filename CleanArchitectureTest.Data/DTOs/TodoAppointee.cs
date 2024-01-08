@@ -1,10 +1,13 @@
-﻿namespace CleanArchitectureTest.Data.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class TodoAppointee
+namespace CleanArchitectureTest.Data.DTOs;
+
+public class TodoAppointee : Base
 {
+    [Key]
     public Guid TodoId { get; set; }
-    public Todo Todo { get; set; } = default!;
 
-    public Guid AppointeeId { get; set; }
-    public Member Appointee { get; set; } = default!;
+    [Key]
+    public Guid AppointeeId { get; set; } = default!;
+
 }

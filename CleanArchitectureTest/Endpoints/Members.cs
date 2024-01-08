@@ -17,9 +17,12 @@ public class MembersEndpoints : ICarterModule
 
         group.MapGet("/", async (IMediator mediator) =>
         {
-            var members = await mediator.Send(new GetAllMembers.Query());
+            var result = await mediator.Send(new GetAllMembers.Query());
 
-            Results.Ok(members);
+            return result.Match(
+                m => Results.Ok(m),
+                err => Results.BadRequest(err)
+                );
         })
         .Produces<List<MemberEntity>>();
 
@@ -35,9 +38,20 @@ public class MembersEndpoints : ICarterModule
         })
             .Produces<MemberEntity>();
 
-        group.MapPost("/", async ([FromBody] CreateMember.Command command, IMediator mediator) =>
+        group.MapGet("/appointee", async (Guid Id, IMediator mediator) =>
         {
-            var result = await mediator.Send(command);
+            var result = await mediator.Send(new GetTodosForMember.Query(Id));
+
+            return result.Match(
+                t => Results.Ok(t),
+                nf => Results.NotFound(nf.msg),
+                err => Results.BadRequest(err)
+                );
+        });
+
+        group.MapPost("/", async ([FromBody] CreateMemberRequest request, IMediator mediator) =>
+        {
+            var result = await mediator.Send(new CreateMember.Command(request.firstName, request.lastName));
 
             return result.Match(
                 m => Results.Ok(m),

@@ -46,15 +46,15 @@ public class ModifyAppointee
                 }
 
                 ta.AppointeeId = request.newMemberId;
-                ta.Appointee = appointee;
+                ta.UpdatedOn = DateTime.UtcNow;
 
                 _context.Update(ta);
                 await _context.SaveChangesAsync();
 
                 return new TodoAppointeeEntity
                 {
-                    Todo = ta.Todo.Adapt<TodoEntity>(),
-                    Appointee = ta.Appointee.Adapt<MemberEntity>()
+                    Todo = todo.Adapt<TodoEntity>(),
+                    Appointee = appointee.Adapt<MemberEntity>()
                 };
             }
             catch (Exception ex)

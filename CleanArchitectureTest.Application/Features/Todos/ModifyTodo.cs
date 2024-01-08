@@ -64,6 +64,8 @@ namespace CleanArchitectureTest.Application.Features.Todos
                         todo.DueDate = request.dueDate;
                     }
 
+                    todo.UpdatedOn = DateTime.UtcNow;
+
                     _context.Update(todo);
                     await _context.SaveChangesAsync();
 

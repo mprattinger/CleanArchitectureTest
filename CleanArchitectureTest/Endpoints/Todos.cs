@@ -56,6 +56,7 @@ public class TodosEndpoints : ICarterModule
 
             return result.Match(
                 m => Results.Ok(m),
+                _ => Results.NotFound(),
                 err => Results.BadRequest(err)
                 );
         })

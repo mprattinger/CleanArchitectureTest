@@ -32,7 +32,13 @@ public class GetAppointeesForTodo
                     return new NotFound();
                 }
 
-                return ta.Select(x => x.Appointee.Adapt<MemberEntity>()).ToList();
+                var ret = _context
+                    .Members
+                    .Where(x => ta.Select(x => x.AppointeeId).Contains(x.Id))
+                    .Select(x => x.Adapt<MemberEntity>())
+                    .ToList();
+
+                return ret;
             }
             catch (Exception ex)
             {

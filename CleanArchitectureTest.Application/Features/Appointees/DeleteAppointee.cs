@@ -8,7 +8,7 @@ using OneOf.Types;
 
 namespace CleanArchitectureTest.Application.Features.Appointees;
 
-public class RemoveAppointee
+public class DeleteAppointee
 {
     public record Command(Guid todoId, Guid memberId) : IRequest<OneOf<Success, AppointeeNotFound, ApplicationError>>;
 
@@ -46,7 +46,7 @@ public class RemoveAppointee
             }
             catch (Exception ex)
             {
-                return ApplicationError.ApplicationError_Exception(nameof(RemoveAppointee), ex);
+                return ApplicationError.ApplicationError_Exception(nameof(DeleteAppointee), ex);
             }
         }
     }

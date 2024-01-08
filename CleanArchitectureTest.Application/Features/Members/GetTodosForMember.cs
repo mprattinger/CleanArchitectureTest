@@ -34,7 +34,13 @@ public class GetTodosForMember
 
                 var links = await _context.TodoAppointees.Where(x => x.AppointeeId == appointee.Id).ToListAsync(cancellationToken);
 
-                return links.Select(x => x.Todo.Adapt<TodoEntity>()).ToList();
+                var ret = await _context
+                    .Todos
+                    .Where(x => links.Select(x => x.TodoId).Contains(x.Id))
+                    .Select(x => x.Adapt<TodoEntity>())
+                    .ToListAsync();
+
+                return ret;
             }
             catch (Exception ex)
             {

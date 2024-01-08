@@ -3,6 +3,7 @@ using System;
 using CleanArchitectureTest.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitectureTest.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240108191001_todoapp3")]
+    partial class todoapp3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -82,13 +85,12 @@ namespace CleanArchitectureTest.Data.Migrations
                     b.Property<Guid>("AppointeeId")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("UpdatedOn")
+                    b.Property<Guid?>("MemberId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("TodoId", "AppointeeId");
+
+                    b.HasIndex("MemberId");
 
                     b.ToTable("TodoAppointees");
                 });
@@ -102,6 +104,29 @@ namespace CleanArchitectureTest.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("CreatedBy");
+                });
+
+            modelBuilder.Entity("CleanArchitectureTest.Data.DTOs.TodoAppointee", b =>
+                {
+                    b.HasOne("CleanArchitectureTest.Data.DTOs.Member", null)
+                        .WithMany("TodoAppointees")
+                        .HasForeignKey("MemberId");
+
+                    b.HasOne("CleanArchitectureTest.Data.DTOs.Todo", null)
+                        .WithMany("TodoAppointees")
+                        .HasForeignKey("TodoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CleanArchitectureTest.Data.DTOs.Member", b =>
+                {
+                    b.Navigation("TodoAppointees");
+                });
+
+            modelBuilder.Entity("CleanArchitectureTest.Data.DTOs.Todo", b =>
+                {
+                    b.Navigation("TodoAppointees");
                 });
 #pragma warning restore 612, 618
         }

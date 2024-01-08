@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureTest", "CleanArchitectureTest\CleanArchitectureTest.csproj", "{4778F9E1-9653-4EF4-A061-75BEB424B74D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureTest", "CleanArchitectureTest\CleanArchitectureTest.csproj", "{4778F9E1-9653-4EF4-A061-75BEB424B74D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureTest.Application", "CleanArchitectureTest.Application\CleanArchitectureTest.Application.csproj", "{CA43EC0D-DEF3-483B-84A3-0231E9656A91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureTest.Application", "CleanArchitectureTest.Application\CleanArchitectureTest.Application.csproj", "{CA43EC0D-DEF3-483B-84A3-0231E9656A91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureTest.Data", "CleanArchitectureTest.Data\CleanArchitectureTest.Data.csproj", "{F4620115-BE8E-4E02-88F9-CF4B69AD7E87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureTest.Data", "CleanArchitectureTest.Data\CleanArchitectureTest.Data.csproj", "{F4620115-BE8E-4E02-88F9-CF4B69AD7E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureTest.Contracts", "CleanArchitectureTest.Contracts\CleanArchitectureTest.Contracts.csproj", "{95131A92-C09A-4F6F-AC4F-A345C15BEB77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureTest.Contracts", "CleanArchitectureTest.Contracts\CleanArchitectureTest.Contracts.csproj", "{95131A92-C09A-4F6F-AC4F-A345C15BEB77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureTest.Client", "CleanArchitectureTest.Client\CleanArchitectureTest.Client.csproj", "{BE62B3AE-6F9B-4256-9509-99F1C8208CF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{95131A92-C09A-4F6F-AC4F-A345C15BEB77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95131A92-C09A-4F6F-AC4F-A345C15BEB77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95131A92-C09A-4F6F-AC4F-A345C15BEB77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE62B3AE-6F9B-4256-9509-99F1C8208CF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE62B3AE-6F9B-4256-9509-99F1C8208CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE62B3AE-6F9B-4256-9509-99F1C8208CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE62B3AE-6F9B-4256-9509-99F1C8208CF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
