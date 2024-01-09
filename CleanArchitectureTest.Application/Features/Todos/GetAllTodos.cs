@@ -25,7 +25,10 @@ namespace CleanArchitectureTest.Application.Features.Todos
             {
                 try
                 {
-                    var todos = await _context.Todos.ToListAsync(cancellationToken);
+                    var todos = await _context
+                        .Todos
+                        .Include(x => x.CreatedBy)
+                        .ToListAsync(cancellationToken);
 
                     return todos.Select(t => t.Adapt<TodoEntity>()).ToList();
                 }

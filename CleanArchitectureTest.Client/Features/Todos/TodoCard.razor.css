@@ -1,0 +1,9 @@
+﻿.twl {
+    display: flex;
+    flex-direction: column;
+}
+
+.twl > span {
+    font-weight: bold;
+    font-size: .8rem;
+}

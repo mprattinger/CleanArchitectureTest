@@ -16,4 +16,10 @@ public class TodoEntity
     [JsonPropertyName("dueDate")]
     public DateTime? DueDate { get; set; }
 
+    [JsonPropertyName("createdById")]
+    public Guid CreatedById { get; set; }
+
+    [JsonPropertyName("createdBy")]
+    public MemberEntity? CreatedBy { get; set; }
+
 }

@@ -1,3 +1,40 @@
 ﻿@inherits LayoutComponentBase
 
-@Body
+<div class="main">
+    <CascadingValue Value="this" Name="ErrorComponent">
+        @Body
+    </CascadingValue>
+
+    <div class="content px-4">
+        @if (_isErrorActive)
+        {
+            <div class="alert alert-danger" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" @onclick="hideError">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3>@_title</h3>
+                <p>@_message</p>
+            </div>
+        }
+    </div>
+</div>
+
+
+@code {
+    bool _isErrorActive;
+    string _title = "";
+    string _message = "";
+
+    public void ShowError(string title, string message)
+    {
+        _isErrorActive = true;
+        _title = title;
+        _message = message;
+        StateHasChanged();
+    }
+
+    void hideError()
+    {
+        _isErrorActive = false;
+    }
+}

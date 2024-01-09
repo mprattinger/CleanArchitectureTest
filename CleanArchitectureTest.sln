@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureTest.Data"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureTest.Contracts", "CleanArchitectureTest.Contracts\CleanArchitectureTest.Contracts.csproj", "{95131A92-C09A-4F6F-AC4F-A345C15BEB77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureTest.Client", "CleanArchitectureTest.Client\CleanArchitectureTest.Client.csproj", "{BE62B3AE-6F9B-4256-9509-99F1C8208CF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureTest.Client", "CleanArchitectureTest.Client\CleanArchitectureTest.Client.csproj", "{BE62B3AE-6F9B-4256-9509-99F1C8208CF2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

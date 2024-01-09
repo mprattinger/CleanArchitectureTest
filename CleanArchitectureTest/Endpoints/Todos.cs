@@ -26,9 +26,9 @@ public class TodosEndpoints : ICarterModule
         })
         .Produces<List<TodoEntity>>();
 
-        group.MapGet("/{id}", async (Guid Id, IMediator mediator) =>
+        group.MapGet("/{id}", async (Guid TodoId, IMediator mediator) =>
         {
-            var result = await mediator.Send(new GetTodoById.Query(Id));
+            var result = await mediator.Send(new GetTodoById.Query(TodoId));
 
             return result.Match(
                 m => Results.Ok(m),
@@ -38,9 +38,9 @@ public class TodosEndpoints : ICarterModule
         })
             .Produces<TodoEntity>();
 
-        group.MapGet("/createdby", async (Guid id, IMediator mediator) =>
+        group.MapGet("/createdby", async (Guid CreatedById, IMediator mediator) =>
         {
-            var result = await mediator.Send(new GetTodosByCreator.Query(id));
+            var result = await mediator.Send(new GetTodosByCreator.Query(CreatedById));
 
             return result.Match(
                 m => Results.Ok(m),
@@ -49,6 +49,18 @@ public class TodosEndpoints : ICarterModule
                 );
         })
             .Produces<List<TodoEntity>>();
+
+        group.MapGet("/appointees", async (Guid TodoId, IMediator mediator) =>
+        {
+            var result = await mediator.Send(new GetAppointeesForTodo.Query(TodoId));
+
+            return result.Match(
+                m => Results.Ok(m),
+                _ => Results.NotFound(),
+                err => Results.BadRequest(err)
+                );
+        })
+            .Produces<List<MemberEntity>>();
 
         group.MapPost("/", async ([FromBody] CreateTodoRequest request, IMediator mediator) =>
         {
@@ -62,9 +74,9 @@ public class TodosEndpoints : ICarterModule
         })
         .Produces<TodoEntity>();
 
-        group.MapPatch("/{id}", async (Guid Id, [FromBody] ModifyTodoRequest request, IMediator mediator) =>
+        group.MapPatch("/{id}", async (Guid TodoId, [FromBody] ModifyTodoRequest request, IMediator mediator) =>
         {
-            var result = await mediator.Send(new ModifyTodo.Command(Id, request.Title, request.Description, request.DueDate));
+            var result = await mediator.Send(new ModifyTodo.Command(TodoId, request.Title, request.Description, request.DueDate));
 
             return result.Match(
                 m => Results.Ok(m),
@@ -74,9 +86,9 @@ public class TodosEndpoints : ICarterModule
         })
             .Produces<TodoEntity>();
 
-        group.MapDelete("/{id}", async (Guid Id, IMediator mediator) =>
+        group.MapDelete("/{id}", async (Guid TodoId, IMediator mediator) =>
         {
-            var result = await mediator.Send(new DeleteTodo.Command(Id));
+            var result = await mediator.Send(new DeleteTodo.Command(TodoId));
 
             return result.Match(
                 _ => Results.Ok(),

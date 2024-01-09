@@ -1,0 +1,71 @@
+﻿@using CleanArchitectureTest.Contracts.Entities
+
+@inject ITodoService todoService
+
+@if (Todo is not null)
+{
+    <div class="card">
+        <div class="card-body">
+            <h2>@Todo.Title</h2>
+            <p>@Todo.Description</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        @if (Todo.DueDate is not null)
+                        {
+                            <div class="twl">
+                                <span>Enddatum</span>
+                                @Todo.DueDate.Value.ToShortDateString()
+                            </div>
+
+                            <div class="twl">
+                                <span>Erstellt von</span>
+                                @Todo.CreatedBy?.FirstName @Todo.CreatedBy?.LastName
+                            </div>
+                        }
+                    </div>
+                    <div class="col">
+                        @if (_appointees.Any())
+                        {
+                            <ul>
+                                @foreach(var a in _appointees)
+                                {
+                                    <li>@a.FirstName @a.LastName</li>
+                                }
+                            </ul>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+
+    List<MemberEntity> _appointees = [];
+
+    [Parameter]
+    public TodoEntity? Todo { get; set; }
+
+    [CascadingParameter(Name = "ErrorComponent")]
+    protected IErrorComponent? ErrorComponent { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Todo is not null)
+        {
+            try
+            {
+                _appointees = await todoService.GetAppointeesForTodo(Todo.Id);
+            }
+            catch (Exception ex)
+            {
+                if (ErrorComponent is not null)
+                {
+                    ErrorComponent.ShowError("Loading Appointees", ex.Message);
+                }
+            }
+        }
+    }
+}

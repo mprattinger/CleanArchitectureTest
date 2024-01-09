@@ -1,0 +1,39 @@
+﻿@using CleanArchitectureTest.Contracts.Entities
+
+@inject ITodoService todoService
+
+<div class="container w-75">
+    @if (_todos.Any())
+    {
+        foreach (var t in _todos)
+        {
+            <TodoCard Todo="t" />
+        }
+    }
+    else
+    {
+        <p>No Todo's'</p>
+    }
+</div>
+
+@code {
+    List<TodoEntity> _todos = [];
+
+    [CascadingParameter(Name = "ErrorComponent")]
+    protected IErrorComponent? ErrorComponent { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _todos = await todoService.GetTodos();
+        }
+        catch (Exception ex)
+        {
+            if (ErrorComponent is not null)
+            {
+                ErrorComponent.ShowError("Loading Todos", ex.Message);
+            }
+        }
+    }
+}
