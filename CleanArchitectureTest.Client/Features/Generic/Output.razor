@@ -1,0 +1,15 @@
+﻿<div class="flex flex-col">
+    @if (Label is not null)
+    {
+        <span class="font-bold">@Label</span>
+    }
+    @Text
+</div>
+
+@code {
+    [Parameter]
+    public string? Label { get; set; }
+
+    [Parameter, EditorRequired]
+    public string Text { get; set; } = "";
+}

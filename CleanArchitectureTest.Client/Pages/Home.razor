@@ -1,11 +1,11 @@
 ﻿@page "/"
+@rendermode InteractiveAuto
+
 @using CleanArchitectureTest.Client.Features.Todos
 @using CleanArchitectureTest.Contracts.Entities
 
-
-
 <PageTitle>Home</PageTitle>
 
-<h1>Platform: @(OperatingSystem.IsBrowser() ? "Wasm" : "Server")</h1>
+<h1 class="text-lg font-bold">Platform: @(OperatingSystem.IsBrowser() ? "Wasm" : "Server")</h1>
 
 <TodoList />

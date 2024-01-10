@@ -4,8 +4,47 @@
 
 @if (Todo is not null)
 {
-    <div class="card">
-        <div class="card-body">
+    <div class="border-2 border-gray-400 p-4 rounded-lg bg-white shadow-lg">
+        <div class="flex border-b-2 mb-2">
+            <div class="grow">
+                <div class="text-lg font-bold">@Todo.Title</div>
+                <p class="p-2 mb-1">@Todo.Description</p>
+            </div>
+            <div>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div>
+            <div class="flex">
+                <div class="grow">
+                    @if (Todo.DueDate is not null)
+                    {
+                        <Output Label="Enddatum" Text="@Todo.DueDate.Value.ToShortDateString()" />
+
+                        <Output Label="Erstellt von" Text="@($"{Todo.CreatedBy?.FirstName} {Todo.CreatedBy?.LastName}")" />
+                    }
+                </div>
+                <div class="grow">
+                    @if (_appointees.Any())
+                    {
+                        <span class="font-bold">Wer?</span>
+                        <ul>
+                            @foreach (var a in _appointees)
+                            {
+                                <li>@a.FirstName @a.LastName</li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    @*  <div class="">
+        <div class="">
             <h2>@Todo.Title</h2>
             <p>@Todo.Description</p>
             <div class="container">
@@ -38,7 +77,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> *@
 }
 
 @code {
